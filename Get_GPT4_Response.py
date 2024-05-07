@@ -2,8 +2,6 @@ import os.path
 import openai
 import configparser
 import time
-import json
-import re
 
 MAX_ERRORS = 5
 
@@ -42,6 +40,6 @@ def getGPT4Response(prompt, prompt_prefix, config_dict):
         else:
             raise Exception('Max errors reached. Exiting...')
     try:
-        return json.loads('{'+re.findall(r'\{(.*?)\}',response.choices[0].message.content.replace('\n',''))[0]+'}')
+        return response.choices[0].message.content
     except:
         return {}
